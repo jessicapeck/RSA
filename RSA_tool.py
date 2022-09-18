@@ -7,7 +7,7 @@ letters = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","
 def encrypt(letters):
     os.system("cls")
 
-    print("requirements for p and q : must be two different, large prime numbers")
+    print("requirements for p and q : must be two different prime numbers")
     p = int(input("enter p : "))
     q = int(input("enter q : "))
     print("")
@@ -28,7 +28,6 @@ def encrypt(letters):
     print("")
 
     # calculate up to 100 possible values of e
-
     possible_e = []
 
     item_count = 0
@@ -42,7 +41,6 @@ def encrypt(letters):
         count += 1
 
     # display possible values of e to user
-    
     max_num = max(possible_e)
     max_num_length = len(str(max_num))
 
@@ -68,6 +66,7 @@ def encrypt(letters):
 
     print("")
 
+    # get input of e
     e = int(input("enter e : "))
 
     print("")
@@ -76,6 +75,7 @@ def encrypt(letters):
     #print(f"e = {e}")
     #print("")
 
+    # calculate d
     count = 1
     while True:
         if ((euler_phi_function_of_n * count) + 1) % e == 0:
@@ -85,18 +85,16 @@ def encrypt(letters):
         count = count + 1
 
     # TEST
-    print(f"d = {d}")
-    print("")
+    #print(f"d = {d}")
+    #print("")
 
-    plain_text = input("enter cipher text : ")
+    # get input of plain text
+    plain_text = input("enter plain text : ")
     plain_text = plain_text.lower().strip()
 
     print("")
 
-    # TEST
-    #print(f"plain_text = {plain_text}")
-    #print("")
-
+    # encrypt
     cipher_text = ""
     numbers = []
     grouped_numbers = []
@@ -132,11 +130,13 @@ def encrypt(letters):
         cipher_number = str(cipher_number).zfill(4)
         cipher_text += cipher_number + " "
 
+    # display public key and private key information
     print(f"public key : e = {e}, n = {n}")
     print(f"private key : d = {d}, n = {n}")
 
     print("")
 
+    # display cipher text
     print(f"cipher text : {cipher_text}")
 
     print("")
@@ -146,19 +146,23 @@ def encrypt(letters):
 def decrypt(letters):
     os.system("cls")
 
+    # get input of cipher text
     cipher_text = input("enter cipher text : ")
     cipher_text_groups = cipher_text.split(" ")
 
     print(" ")
 
+    # get input of d
     d = int(input("enter decryption exponent, d : "))
 
     print("")
 
+    # get input of n
     n = int(input("enter public modulus, n : "))
 
     print("")
 
+   # decrypt
     grouped_numbers = []
 
     for cipher_group in cipher_text_groups:
@@ -188,6 +192,7 @@ def decrypt(letters):
         letter_representation = letters[num - 1]
         plain_text += letter_representation
 
+    # display plain text
     print(plain_text)
 
     print(" ")
@@ -201,13 +206,14 @@ def main():
         print("-"*31)
         print("| 1. encrypt using RSA        |")
         print("| 2. decrypt RSA cipher text  |")
+        print("| 3. exit")
         print("-"*31)
         print("")
 
-        option_choices = ["1","2"]
+        option_choices = ["1","2","3"]
 
         while True:
-            option = input("enter 1 or 2 to choose option : ")
+            option = input("please enter number to choose option : ")
             option = option.lower().strip()
 
             # validate option choice
@@ -222,5 +228,12 @@ def main():
             encrypt(letters)
         elif option == "2":
             decrypt(letters)
+        elif option == "3":
+            break
 
 main()
+
+os.system("cls")
+
+print("thank you, goodbye!")
+print("")

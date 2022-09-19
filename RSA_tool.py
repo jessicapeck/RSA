@@ -193,7 +193,7 @@ def decrypt(letters):
         plain_text += letter_representation
 
     # display plain text
-    print(plain_text)
+    print(f"plain text : {plain_text}")
 
     print(" ")
 
